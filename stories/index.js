@@ -8,7 +8,7 @@ import "index.scss";
 import Button from "components/Button";
 import DayListItem from "components/DayListItem";
 
-// ------------------------ STORIES -------------------------------- //
+// -------------------------- STORIES -------------------------------- //
 
 // stories for Button
 
