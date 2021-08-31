@@ -45,7 +45,7 @@ storiesOf("Button", module)
   ));
 
 
-  
+
 // stories for DayList
 
   const days = [
@@ -66,6 +66,7 @@ storiesOf("Button", module)
     },
   ];
   
+
   storiesOf("DayList", module)
     .addParameters({
       backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
