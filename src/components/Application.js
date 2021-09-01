@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Button from "components/Button";
-import DayListItem from "components/DayListItem";
-import DayList from "components/DayList";
+import Button from "./Button";
+import DayListItem from "./DayListItem";
+import DayList from "./DayList";
+import InterviewerList from "./InterviewerList";
 
 
-import "components/Application.scss";
+import "./Application.scss";
 
 // mock data
 const days = [
