@@ -31,9 +31,12 @@ export default function Application(props) {
 
   const [day, setDay] = useState("Monday");
 
+  // by default: no interviewer selected
+  const [interviewer, setInterviewer] = useState("");
+
   return (
     <main className="layout">
-      
+
       <section className="sidebar">
       <img
           className="sidebar--centered"
@@ -43,8 +46,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-          days={days}
+        // /CREATE PROPS and pass them to DayList
           day={day}
+          days={days}
           setDay={setDay}
         />
         </nav>
