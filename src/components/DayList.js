@@ -14,6 +14,8 @@ export default function DayList(props) {
             name={day.name}
             spots={day.spots}
             // name prop for DayListItem === day prop for DayList
+            // selected is a BOOLEAN
+            //day.name does not change but props.day changes depending on what has been clicked on
             selected={day.name === props.day}
             // setDay for DayListItem === setDay prop for DayList
             // prop drilling: passing down the state from Application down to DayListItem
