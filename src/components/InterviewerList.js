@@ -10,10 +10,6 @@ export default function InterviewerList(props) {
 
   const { interviewers, interviewer, setInterviewer } = props;
 
-  const interviewerListItemClass = classnames("interviewers", {
-    "interviewers__item--selected": props.selected
-  });
-
 
   return (
     <section className="interviewers">
