@@ -4,9 +4,10 @@ import classNames from "classnames";
 
 
 export default function InterviewerListItem(props) {
-  
+
   const classnames = require("classnames");
 
+  // add key to prop???
   const { id, name, avatar, selected, setInterviewer } = props;
 
   const interviewerListItemClass = classnames("interviewers", {
