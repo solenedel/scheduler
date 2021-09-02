@@ -32,7 +32,7 @@ export default function Application(props) {
   const [day, setDay] = useState("Monday");
 
   // by default: no interviewer selected
-  const [interviewer, setInterviewer] = useState("");
+  // const [interviewer, setInterviewer] = useState("");
 
   return (
     <main className="layout">
