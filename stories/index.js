@@ -183,8 +183,10 @@ storiesOf("Appointment", module)
                         interviewers={interviewers}
                         interviewer={interviewer}
                         onSave={action("onSave")}
-                        onCancel={action("onCancel")} />)
+                        onCancel={action("onCancel")}
+                        setInterviewer={action("setInterviewer")} />)
   .add("Create", () => <Form 
                         interviewers={interviewers}
                         onSave={action("onSave")}
-                        onCancel={action("onCancel")}/>)
+                        onCancel={action("onCancel")}
+                        setInterviewer={action("setInterviewer")} />)
