@@ -10,7 +10,9 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={props.time} />
       {/* if props.interview is truthy, render ths Show component. Else, render Empty */}
-      {props.interview ? <Show /> : <Empty />}
+      {props.interview ? <Show student={props.interview.student} 
+                               interviewer={props.interview.interviewer} /> 
+                               : <Empty />}
     </article>
 
   );
