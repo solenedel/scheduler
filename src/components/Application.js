@@ -114,6 +114,9 @@ export default function Application(props) {
               {...appointment} />
           )
         })}
+
+        {/* the appointment below is a fake and is not rendered. It is just used to 
+        display the end of the day without any interviews */}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
