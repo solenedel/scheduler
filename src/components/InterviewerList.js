@@ -12,11 +12,13 @@ export default function InterviewerList(props) {
   const interviewerListItems = props.interviewers && props.interviewers.map(interviewer => {
     return <InterviewerListItem 
             key={interviewer.id}
-            id={interviewer.id}
             name={interviewer.name}
+            // id={interviewer.id} // Do not need as per compass lul
             avatar={interviewer.avatar}
-            setInterviewer={props.setInterviewer}
             selected={interviewer.id === props.interviewer}
+            //setInterviewer prop is an anon function that returns the return value of props.setInterviewer(interviewer.id) (which is the real function that changes the state)
+            setInterviewer={() => props.setInterviewer(interviewer.id)}
+    
             />
 
   });
