@@ -82,7 +82,7 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
 
 // ----------------------- Tests for getInterview ------------------------ //
 
-test.only("getInterview returns an object with the interviewer data", () => {
+test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(
     expect.objectContaining({
@@ -97,7 +97,7 @@ test.only("getInterview returns an object with the interviewer data", () => {
 });
 
 
-test.only("getInterview returns null if no interview is booked", () => {
+test("getInterview returns null if no interview is booked", () => {
   const result = getInterview(state, state.appointments["2"].interview);
   expect(result).toBeNull();
 });
