@@ -4,6 +4,7 @@ import DayListItem from "./DayListItem";
 import DayList from "./DayList";
 import InterviewerList from "./InterviewerList";
 import Appointment from "components/Appointment";
+import getAppointmentsForDay from "../helpers/selectors"
 
 
 import "./Application.scss";
@@ -71,11 +72,10 @@ export default function Application(props) {
   // request days data from /api/days
   useEffect(() => {
     axios.get('/api/days').then(response => {
-      console.log('response.data:', response.data);
+      // console.log('response.data:', response.data);
       setDays([...response.data]);
     })
   }, []);
-
 
 
   return (
