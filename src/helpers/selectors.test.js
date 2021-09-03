@@ -1,10 +1,12 @@
 import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
-// --------------------- Tests for getAppointmentsForDay ------------------------ //
+// --------------------- Mock data --------------------------- //
+
 
 // mock data 
 
 const state = {
+
   days: [
     {
       id: 1,
@@ -17,6 +19,7 @@ const state = {
       appointments: [4, 5]
     }
   ],
+
   appointments: {
     "1": { id: 1, time: "12pm", interview: null },
     "2": { id: 2, time: "1pm", interview: null },
@@ -31,11 +34,23 @@ const state = {
       time: "4pm",
       interview: { student: "Chad Takahashi", interviewer: 2 }
     }
+  },
+
+  interviewers: {
+    "1": {  
+      "id": 1,
+      "name": "Sylvia Palmer",
+      "avatar": "https://i.imgur.com/LpaY82x.png"
+    },
+    "2": {
+      id: 2,
+      name: "Tori Malcolm",
+      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+    }
   }
 };
 
-
-// tests
+// --------------------- Tests for getAppointmentsForDay ------------------------ //
 
 test("getAppointmentsForDay returns an array", () => {
   const result = getAppointmentsForDay(state, "Monday");
@@ -64,28 +79,10 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
 });
 
 
+
 // ----------------------- Tests for getInterview ------------------------ //
 
-// mock data 
-
-const interviewers = {
-  "1": {  
-    "id": 1,
-    "name": "Sylvia Palmer",
-    "avatar": "https://i.imgur.com/LpaY82x.png"
-  },
-  "2": {
-    id: 2,
-    name: "Tori Malcolm",
-    avatar: "https://i.imgur.com/Nmx0Qxo.png"
-  }
-};
-
-
-
-// tests 
-
-test("getInterview returns an object with the interviewer data", () => {
+test.only("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(
     expect.objectContaining({
@@ -100,7 +97,7 @@ test("getInterview returns an object with the interviewer data", () => {
 });
 
 
-test("getInterview returns null if no interview is booked", () => {
+test.only("getInterview returns null if no interview is booked", () => {
   const result = getInterview(state, state.appointments["2"].interview);
   expect(result).toBeNull();
 });

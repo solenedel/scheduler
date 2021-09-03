@@ -25,14 +25,23 @@ function getAppointmentsForDay(state, dayName) {
 
 //  return an object that contains the interview data if it is passed an object that contains an interviewer.
 function getInterview(state, interview) {
-  
+
+  // if interview is not null
+ if (interview) {
+
+  return {
+    student: interview.student,
+    interviewer: {...state.interviewers[interview.interviewer]}
+  }
+ }
+  return null;
 }
 
 
 
 
 // ----------------- Exported functions -------------------- //
-export {getAppointmentsForDay};
+export {getAppointmentsForDay, getInterview};
 
 // module.exports = {getAppointmentsForDay};
 //1. export default --> to import default export, need to import without curly braces

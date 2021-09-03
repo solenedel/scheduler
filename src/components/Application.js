@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 import "./Application.scss";
 
 // ------------------------- Test Data ------------------------- //
@@ -53,7 +53,7 @@ export default function Application(props) {
   // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const interview = getInterview(state, appointment.interview);
+  
 
   const setDay = day => setState({ ...state, day });
   //const setDays = days => setState(prev => ({ ...prev, days }));
@@ -85,7 +85,11 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-          
+
+          console.log('appointment.interview: ', appointment.interview);
+
+          const interview = getInterview(state, appointment.interview);
+
           return (
             <Appointment
               key={appointment.id}
