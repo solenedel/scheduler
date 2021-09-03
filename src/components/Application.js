@@ -18,34 +18,45 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday", 
     days: [], 
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
   console.log('state: ', state);
+  console.log('state.interviewers', state.interviewers);
 
-  // request days and appointments data. The promise resolves when both
-  // get requests are complete.
+  // request days and appointments data. The promise resolves when both get requests are complete.
   useEffect(() => {
+    // Promise.all returns an array of the responses from each request
     Promise.all([
       axios.get('/api/days'),
-      axios.get('/api/appointments')
+      axios.get('/api/appointments'),
+      axios.get('/api/interviewers')
     ]).then(response => {
         setState(prev => {
+         
           return {
             ...prev,
             days: response[0].data,
-            appointments: response[1].data
+            appointments: response[1].data,
+            interviewers: response[2].data
           };
+
         });
     }).catch(response => console.log('Error: ', response.message));
   }, []);
+
+  // TEST 
+ 
 
   // call function to get the appointments for a certain day depending on the
   // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
+  const interview = getInterview(state, appointment.interview);
+
   const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days }));
+  //const setDays = days => setState(prev => ({ ...prev, days }));
 
   // JSX to be returned by the component function
   return (
@@ -74,11 +85,15 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
+          
           return (
             <Appointment
               key={appointment.id}
-              {...appointment} />
-          )
+              id={appointment.id} 
+              time={appointment.time}
+              interview={interview}
+              />
+          );
         })}
 
         {/* the appointment below is a fake and is not rendered. It is just used to 
