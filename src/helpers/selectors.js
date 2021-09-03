@@ -1,40 +1,24 @@
 
 // returns an array of appointments for that day
-function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, dayName) {
   
-  const finalArray = [];
-
-  // if the days array is not empty:
-  if (state.days.length !== 0) {
+  const dailyAppointments = [];
 
     // loop through the days array in the state object
-  state.days.forEach(DAY => {
+    // forEach checks that there are items in an array
+  state.days.forEach(day => {
 
-    if (DAY.name === day) {
+    if (day.name === dayName) {
 
      // iterate thru the appointments array in each DAY object
-      DAY.appointments.map(appointment => {
+      day.appointments.forEach(appointment => {
 
-        // iterate thru the objects in the appointment object
-        for (const appt in state.appointments) {
-
-          
-          if (appointment === state.appointments[appt].id) {
-            finalArray.push(state.appointments[appt]);
-          }
-        }
-          
-      }); 
-       
+        // lookup the object with that name and push to the dailyAppointments array
+          dailyAppointments.push(state.appointments[appointment]);
+      });  
     }
   });
-
-  } else {
-    return [];
-  }
-    console.log('finalArray: ', finalArray);
-
-    return finalArray; 
+    return dailyAppointments; 
 };
 
 

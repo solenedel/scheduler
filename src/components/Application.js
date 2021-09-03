@@ -1,3 +1,5 @@
+// -------------------- Dependencies / Setup ------------------- //
+
 import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import DayListItem from "./DayListItem";
@@ -5,11 +7,9 @@ import DayList from "./DayList";
 import InterviewerList from "./InterviewerList";
 import Appointment from "components/Appointment";
 import getAppointmentsForDay from "../helpers/selectors"
-
-
 import "./Application.scss";
 
-// mock data
+// ------------------------- Test Data ------------------------- //
 
 const appointments = [
   {
@@ -63,11 +63,21 @@ const appointments = [
 ];
 
 
+// -------------------------- FUNCTION: Application component --------------------------- //
 
 export default function Application(props) {
 
-  const [day, setDay] = useState(["Monday"]);
-  const [days, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: "Monday", 
+    days: [], 
+     // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    appointments: {}
+  });
+
+  // below is not needed because of the above state object
+  // const [day, setDay] = useState(["Monday"]);
+  // const [days, setDays] = useState([]);
+  // const [appointments, setAppointments] = useState({});
 
   // request days data from /api/days
   useEffect(() => {
@@ -78,6 +88,7 @@ export default function Application(props) {
   }, []);
 
 
+  // JSX to be returned by the component function
   return (
     <main className="layout">
 
@@ -90,9 +101,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-        // /CREATE PROPS and pass them to DayList
-          day={day}
-          days={days}
+        // CREATE PROPS and pass them to DayList
+          day={state.day}
+          days={state.days}
           setDay={setDay}
         />
         </nav>
