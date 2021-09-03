@@ -1,12 +1,9 @@
 // -------------------- Dependencies / Setup ------------------- //
 
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import DayListItem from "./DayListItem";
 import DayList from "./DayList";
-import InterviewerList from "./InterviewerList";
 import Appointment from "components/Appointment";
-import getAppointmentsForDay from "../helpers/selectors"
 import "./Application.scss";
 
 // ------------------------- Test Data ------------------------- //
@@ -73,6 +70,10 @@ export default function Application(props) {
      // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {}
   });
+
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState(prev => ({ ...prev, days }));
+
 
   // below is not needed because of the above state object
   // const [day, setDay] = useState(["Monday"]);
