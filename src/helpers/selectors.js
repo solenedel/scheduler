@@ -23,8 +23,15 @@ function getAppointmentsForDay(state, dayName) {
 
 
 
+//  return an object that contains the interview data if it is passed an object that contains an interviewer.
+function getInterview(state, interview) {
+  
+}
 
 
+
+
+// ----------------- Exported functions -------------------- //
 export {getAppointmentsForDay};
 
 // module.exports = {getAppointmentsForDay};
