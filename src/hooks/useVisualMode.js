@@ -5,8 +5,8 @@ function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
-  console.log("mode", mode)
-  console.log("history", history)
+  console.log("mode: ", mode)
+  console.log("history: ", history)
 
   // transition to the next mode
   const transition = (newMode, replace = false) => {
@@ -36,12 +36,9 @@ function useVisualMode(initial) {
 
       // set mode to be the second last element of the history array
       setMode(secondLastItem);
-     // console.log('history.slice(0, -1): ', history.slice(0, -1));
 
+      // remove last element from the history array
       setHistory(history.slice(0, -1));
-    
-      console.log('secondLastItem: ', secondLastItem);
-
     }
     
   }
