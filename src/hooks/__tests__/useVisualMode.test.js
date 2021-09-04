@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 // const useVisualMode = require('hooks/useVisualMode');
-import useVisualMode from "../useVisualMode";
+import { useVisualMode } from "../useVisualMode";
 
 // const ReactTestRenderer = require('react-test-renderer');
 
