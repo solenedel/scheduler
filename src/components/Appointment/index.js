@@ -14,6 +14,7 @@ export default function Appointment(props) {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const CANCELLING = "CANCELLING";
 
   // store a snapshot of the initial state on first page load
   const { mode, transition, back } = useVisualMode(
@@ -32,7 +33,16 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
   }
-  
+
+  const cancel = apptId => {
+
+    transition(CANCELLING);
+
+    props.cancelInterview(props.id)
+      .then(() => transition(EMPTY));
+
+  } 
+   
 
   return (
 
@@ -43,12 +53,14 @@ export default function Appointment(props) {
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && ( 
        <Show student={props.interview.student} 
-             interviewer={props.interview.interviewer} /> )} 
+             interviewer={props.interview.interviewer}
+             onDelete={cancel} /> )} 
       {mode === CREATE && <Form 
                             interviewers={props.interviewers} 
                             onCancel={() => back()} 
                             onSave={save} /> }       
-      {mode === SAVING && <Status message="saving..."/>}                  
+       {mode === SAVING && <Status message="saving..."/>}
+        {mode === CANCELLING && <Status message="cancelling..."/>}                  
     </article>
 
   );
