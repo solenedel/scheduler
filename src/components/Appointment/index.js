@@ -4,6 +4,7 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
+import Status from "./Status";
 import { useVisualMode } from "hooks/useVisualMode";
 
 
@@ -12,6 +13,7 @@ export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const SAVING = "SAVING";
 
   // store a snapshot of the initial state on first page load
   const { mode, transition, back } = useVisualMode(
@@ -25,7 +27,10 @@ export default function Appointment(props) {
       interviewer: interviewer.id
     };
 
-    props.bookInterview(props.id, interview);
+    transition(SAVING);
+
+    props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
   }
   
 
@@ -42,7 +47,8 @@ export default function Appointment(props) {
       {mode === CREATE && <Form 
                             interviewers={props.interviewers} 
                             onCancel={() => back()} 
-                            onSave={save} /> }                         
+                            onSave={save} /> }       
+      {mode === SAVING && <Status message="saving..."/>}                  
     </article>
 
   );

@@ -48,10 +48,28 @@ export default function Application(props) {
   const bookInterview = (apptId, interview) => {
     console.log('bookInterview: ', apptId, interview);
 
+    // create an appointment object from spreading the original appointment object in state.appointments with id apptId, then overwrite the interview property with the newly created interview object
+    const appointment = {
+      ...state.appointments[apptId],
+      interview: {...interview} //update the interview key with the new interview
+    };
+
+    // create an appointments object with the already existing appointments, and 
+    // add the newest appointment object to it
+    const appointments = {
+      ...state.appointments, 
+      [apptId]: appointment 
+    };
+
     // request to database- add interview object to interviews table 
-    axios.put(
+    return axios.put(
       `/api/appointments/${apptId}`, {interview}
-    ).then(res => console.log('response: ', res));
+    ).then(() => setState(prev => {
+      return {
+        ...prev,
+        appointments
+      }
+    }));
     
   }
 
