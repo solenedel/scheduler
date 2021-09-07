@@ -47,6 +47,12 @@ export default function Application(props) {
 
   const bookInterview = (apptId, interview) => {
     console.log('bookInterview: ', apptId, interview);
+
+    // request to database- add interview object to interviews table 
+    axios.put(
+      `/api/appointments/${apptId}`, {interview}
+    ).then(res => console.log('response: ', res));
+    
   }
 
   // call function to get the appointments for a certain day depending on the

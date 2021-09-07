@@ -22,7 +22,7 @@ export default function Appointment(props) {
     // newly created interview
     const interview = {
       student: name,
-      interviewer
+      interviewer: interviewer.id
     };
 
     props.bookInterview(props.id, interview);
