@@ -1,18 +1,10 @@
 import React from "react";
-
-import "components/Button.scss";
-
 import classNames from "classnames";
-import { removePropertiesDeep } from "@babel/types";
-
-
+import "components/Button.scss";
 
 export default function Button(props) {
 
-
-   const classnames = require("classnames");
-
-   const buttonClass = classnames("button", {
+   const buttonClass = classNames("button", {
       "button--confirm": props.confirm, 
       "button--danger": props.danger
    });

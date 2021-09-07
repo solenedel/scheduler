@@ -23,7 +23,6 @@ export default function Application(props) {
   });
 
   console.log('state: ', state);
-  console.log('state.interviewers', state.interviewers);
 
   // request days and appointments data. The promise resolves when both get requests are complete.
   useEffect(() => {
@@ -46,14 +45,22 @@ export default function Application(props) {
     }).catch(response => console.log('Error: ', response.message));
   }, []);
 
-  // TEST 
- 
+  const bookInterview = (id, interview) => {
+    console.log('bookInterview: ', id, interview);
+  }
+
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    bookInterview()
+  }
 
   // call function to get the appointments for a certain day depending on the
   // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-
-  
 
   const setDay = day => setState({ ...state, day });
   //const setDays = days => setState(prev => ({ ...prev, days }));
@@ -97,6 +104,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={getInterviewersForDay(state, state.day)}
+              bookInterview={bookInterview}
               />
           );
         })} 
