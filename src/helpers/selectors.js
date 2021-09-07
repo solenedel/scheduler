@@ -45,7 +45,6 @@ function getInterviewersForDay(state, dayName) {
       });
     }
   });
-  console.log('interviewers: ', interviewers);
     return interviewers; 
 };
 

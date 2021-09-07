@@ -45,17 +45,8 @@ export default function Application(props) {
     }).catch(response => console.log('Error: ', response.message));
   }, []);
 
-  const bookInterview = (id, interview) => {
-    console.log('bookInterview: ', id, interview);
-  }
-
-  const save = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer
-    };
-
-    bookInterview()
+  const bookInterview = (apptId, interview) => {
+    console.log('bookInterview: ', apptId, interview);
   }
 
   // call function to get the appointments for a certain day depending on the
@@ -92,8 +83,6 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {dailyAppointments.map(appointment => {
-
-          console.log('appointment.interview: ', appointment.interview);
 
           const interview = getInterview(state, appointment.interview);
 
