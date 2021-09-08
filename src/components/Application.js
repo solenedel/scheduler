@@ -7,28 +7,22 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 import "./Application.scss";
 import useApplicationData from "hooks/useApplicationData";
 
-// ------------------------- Test Data ------------------------- //
-
-
 // -------------------------- FUNCTION: Application component --------------------------- //
 
 export default function Application(props) {
-
-  
   const {
     state,
     setDay,
     bookInterview,
     cancelInterview
   } = useApplicationData();
-  //console.log('state: ', state);
 
-
+  console.log('state', state);
+  
   
   // call function to get the appointments for a certain day depending on the
   // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-
   
   //const setDays = days => setState(prev => ({ ...prev, days }));
 
