@@ -1,7 +1,9 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import { getByPlaceholderText, getByTestId } from "@testing-library/dom";
+import { getByPlaceholderText, getByTestId, fireEvent } from "@testing-library/dom";
 import Form from "components/Appointment/Form";
+
+
 
 afterEach(cleanup);
 
@@ -25,4 +27,27 @@ describe("Form", () => {
     const { getByTestId } = render(<Form interviewers={interviewers} name="Lydia Miller-Jones" />);
     expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
+
+
+  it("validates that the student name is not blank", () => {
+    const onSave = jest.fn();
+    const { getByText } = render(<Form interviewers={interviewers} name="" onSave={onSave} />);
+    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    fireEvent.click(getByText("Save"));
+    
+    // do not call onSave
+    expect(onSave).not.toHaveBeenCalled();
+  });
+ 
+  
+  // it("calls onSave function when the name is defined", () => {
+  //   /* 3. validation is not shown */
+  //   expect(queryByText(/student name cannot be blank/i)).toBeNull();
+  
+  //   /* 4. onSave is called once*/
+  //   expect(onSave).toHaveBeenCalledTimes(1);
+  
+  //   /* 5. onSave is called with the correct arguments */
+  //   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+  // }); 
 });
