@@ -25,7 +25,7 @@ export default function Form(props) {
   const reset = () => {
     setName("");
     setInterviewer(null);
-    setError("");
+    // setError("");
   };
 
   // cancel will call reset and cancel
@@ -42,7 +42,7 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
-    setError("");
+    // setError("");
     props.onSave(name, interviewer);
   }
 
@@ -66,8 +66,8 @@ export default function Form(props) {
           // value={name} and onChange={(e) => setName(e.target.value)} turn the Form 
           // component into a controlled component
           />
-          <section className="appointment__validation">{error}</section>
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList 
         interviewers={props.interviewers} 
         // if the interviewer state object exists, pass the interviewer.id as a prop called interviewerId
@@ -78,7 +78,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => props.onSave(name, interviewer)}>Save</Button>
+          <Button confirm onClick={() => validate()}>Save</Button>
         </section>
       </section>
     </main>
