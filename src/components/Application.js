@@ -9,7 +9,7 @@ import useApplicationData from "hooks/useApplicationData";
 
 // -------------------------- FUNCTION: Application component --------------------------- //
 
-export default function Application(props) {
+export default function Appointment(props) {
   const {
     state,
     setDay,
