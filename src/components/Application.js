@@ -6,6 +6,8 @@ import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import "./Application.scss";
+import useApplicationData from "hooks/useApplicationData";
+import cancelInterview from "hooks/useApplicationData";
 
 // ------------------------- Test Data ------------------------- //
 
@@ -14,94 +16,22 @@ import "./Application.scss";
 
 export default function Application(props) {
 
-  // object to store states
-  const [state, setState] = useState({
-    day: "Monday", 
-    days: [], 
-    appointments: {},
-    interviewers: {}
-  });
+  
+  const {
+    state,
+    setDay,
+    bookInterview,
+    deleteInterview
+  } = useApplicationData();
+  //console.log('state: ', state);
 
-  console.log('state: ', state);
 
-  // request days and appointments data. The promise resolves when both get requests are complete.
-  useEffect(() => {
-    // Promise.all returns an array of the responses from each request
-    Promise.all([
-      axios.get('/api/days'),
-      axios.get('/api/appointments'),
-      axios.get('/api/interviewers')
-    ]).then(response => {
-        setState(prev => {
-         
-          return {
-            ...prev,
-            days: response[0].data,
-            appointments: response[1].data,
-            interviewers: response[2].data
-          };
-
-        });
-    }).catch(response => console.log('Error: ', response.message));
-  }, []);
-
-  const bookInterview = (apptId, interview) => {
-    console.log('bookInterview: ', apptId, interview);
-
-    // create an appointment object from spreading the original appointment object in state.appointments with id apptId, then overwrite the interview property with the newly created interview object
-    const appointment = {
-      ...state.appointments[apptId],
-      interview: {...interview} //update the interview key with the new interview
-    };
-
-    // create an appointments object with the already existing appointments, and 
-    // add the newest appointment object to it
-    const appointments = {
-      ...state.appointments, 
-      [apptId]: appointment 
-    };
-
-    // request to database- add interview object to interviews table 
-    return axios.put(
-      `/api/appointments/${apptId}`, {interview}
-    ).then(() => setState(prev => {
-      return {
-        ...prev,
-        appointments
-      }
-    }));
-    
-  }
-
-  const cancelInterview = (apptId) => {
-    
-    const appointment = {
-      ...state.appointments[apptId],
-      interview: null //change interview to null
-    };
-
-    const appointments = {
-      ...state.appointments, 
-      [apptId]: appointment 
-    };
-
-    return axios.delete(`/api/appointments/${apptId}`)
-            .then(res => {
-              console.log('delete: res', res) 
-              setState(prev => {
-                return {
-                  ...prev, 
-                  appointments
-                }
-              })
-            })
-  }
-
+  
   // call function to get the appointments for a certain day depending on the
   // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const setDay = day => setState({ ...state, day });
+  
   //const setDays = days => setState(prev => ({ ...prev, days }));
 
   // JSX to be returned by the component function
