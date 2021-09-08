@@ -39,6 +39,7 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
+            data-testid="student-name-input"
             // the name below references the first element of the array on line 10
             // set the input value attribute to the current name state
             value={name}
