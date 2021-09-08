@@ -1,13 +1,11 @@
 // -------------------- Dependencies / Setup ------------------- //
 
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import "./Application.scss";
 import useApplicationData from "hooks/useApplicationData";
-import cancelInterview from "hooks/useApplicationData";
 
 // ------------------------- Test Data ------------------------- //
 
@@ -21,7 +19,7 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
-    deleteInterview
+    cancelInterview
   } = useApplicationData();
   //console.log('state: ', state);
 
