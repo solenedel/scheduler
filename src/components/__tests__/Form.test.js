@@ -31,10 +31,12 @@ describe("Form", () => {
  // BUG: Unable to find an element with the text: /student name cannot be blank
   it("validates that the student name is not blank", () => {
     const onSave = jest.fn();
-    const { getByText } = render(<Form interviewers={interviewers} name="" onSave={onSave} />);
-    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    const { getByText } = render(
+    <Form interviewers={interviewers} name="" onSave={onSave} />);
+
     fireEvent.click(getByText("Save"));
-    
+    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+   
     // do not call onSave
     expect(onSave).not.toHaveBeenCalled();
   });
@@ -42,11 +44,15 @@ describe("Form", () => {
   
   it("calls onSave function when the name is defined", () => {
     const onSave = jest.fn();
+
     const { getByText, queryByText } = render(
-      <Form interviewers={interviewers} name="Lydia Miller-Jones" onSave={onSave} />);
+      <Form interviewers={interviewers} 
+            name="Lydia Miller-Jones" 
+            onSave={onSave} /> );
+
     fireEvent.click(getByText("Save"));
+
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-  
     // onSave is called once
     expect(onSave).toHaveBeenCalledTimes(1);
   

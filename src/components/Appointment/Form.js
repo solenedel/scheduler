@@ -4,6 +4,9 @@ import Button from "components/Button";
 
 export default function Form(props) {
 
+
+  const [error, setError] = useState("");
+
   // set default states for interviewer and name
 
   // interviewer state
@@ -13,6 +16,7 @@ export default function Form(props) {
   
   const [name, setName] = useState(props.name || "");
 
+ 
   // the props.name is any hardcoded value we have in the test code
 
   // HELPER FUNCTIONS
@@ -21,6 +25,7 @@ export default function Form(props) {
   const reset = () => {
     setName("");
     setInterviewer(null);
+    setError("");
   };
 
   // cancel will call reset and cancel
@@ -29,6 +34,17 @@ export default function Form(props) {
     // setError("");
     props.onCancel();
   };
+
+  // check for a blank student name
+  const validate = () => {
+
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+    setError("");
+    props.onSave(name, interviewer);
+  }
 
 
   return (
@@ -50,6 +66,7 @@ export default function Form(props) {
           // value={name} and onChange={(e) => setName(e.target.value)} turn the Form 
           // component into a controlled component
           />
+          <section className="appointment__validation">{error}</section>
         </form>
         <InterviewerList 
         interviewers={props.interviewers} 
