@@ -1,4 +1,4 @@
-// --------------------------------------- CYPRESS TESTS FOR APPOINTMENTS ----------------------------- //
+// --------------------------------------- Cypress tests for appointments ----------------------------- //
 
 describe("Appointments", () => {
   
@@ -10,9 +10,7 @@ describe("Appointments", () => {
    });
  
 
-   // test steps
-
-   // --------------------------- Test: booking an interview ------------------------------ //
+   // -------------------------------- Test: booking an interview --------------------------------------- //
 
   it('should book an interview', () => {
     cy.get('[alt=Add]')
@@ -29,7 +27,7 @@ describe("Appointments", () => {
   });
 
 
-  // ------------------------ Test: editing an interview ------------------------------ //
+  // ----------------------------------- Test: editing an interview --------------------------------------- //
 
   it("should edit an interview", () => {
     cy.get("[alt=Edit]")
@@ -46,7 +44,7 @@ describe("Appointments", () => {
   });
 
 
-  // ------------------------ Test: cancelling an interview ------------------------------ //
+  // ------------------------------------ Test: cancelling an interview ------------------------------------ //
 
   it("should cancel an interview", () => {
     cy.get("[alt=Delete]")

@@ -1,10 +1,14 @@
+
+// --------------------------------------- Cypress tests for navigation ----------------------------- //
+
 describe("Navigation", () => {
 
   it("should visit root", () => {
     cy.visit("/");
   });
 
-  // BUG: BELOW TEST FAILS
+// ------------------------------------- Test: navigate to Tuesday ---------------------------------- //
+
   it("should navigate to Tuesday", () => {
     cy.visit("/");
   
