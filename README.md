@@ -6,13 +6,13 @@ This is a front-end React app that uses several testing tools: Storybook, Jest a
 
 ## Screenshots 📸
 
-![](scheduler/screenshots/Scheduler_1.png)
+![](./screenshots/Scheduler_1.png)
 
-![](scheduler/screenshots/Scheduler_2.png)
+![](./screenshots/Scheduler_2.png)
 
-![](scheduler/screenshots/Scheduler_3.png)
+![](./screenshots/Scheduler_3.png)
 
-![](scheduler/screenshots/Scheduler_4.png)
+![](./screenshots/Scheduler_4.png)
 
 ## Setup 💡
 
