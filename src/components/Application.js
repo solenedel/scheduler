@@ -19,7 +19,6 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  console.log('state: ', state);
   
   
   // call function to get the appointments for a certain day depending on the

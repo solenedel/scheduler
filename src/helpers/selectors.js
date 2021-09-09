@@ -1,69 +1,68 @@
 
-// returns an array of appointments for that day
+// ----------------------------------- getAppointmentsForDay ------------------------------ //
+
+// returns an array of appointments for that day.
+
 function getAppointmentsForDay(state, dayName) {
   
   const dailyAppointments = [];
 
-    // loop through the days array in the state object
-    // forEach checks that there are items in an array
   state.days.forEach(day => {
 
     if (day.name === dayName) {
 
-     // iterate thru the appointments array in each DAY object
       day.appointments.forEach(appointment => {
-
-        // lookup the object with that name and push to the dailyAppointments array
-          dailyAppointments.push(state.appointments[appointment]);
+        dailyAppointments.push(state.appointments[appointment]);
       });  
     }
   });
-    return dailyAppointments; 
+  return dailyAppointments; 
 };
 
 
+// ----------------------------------- getInterviewersForDay ------------------------------ //
 
-// returns an array of interviewers for that day
+// returns an array of interviewers for that day.
+
 function getInterviewersForDay(state, dayName) {
   
   const interviewers = [];
 
-    // loop through the days array in the state object
-    // forEach checks that there are items in an array
   state.days.forEach(day => {
-
 
     if (day.name === dayName) {
 
-     // iterate thru the appointments array in each DAY object
       day.interviewers.forEach(interviewer => {
-
-    
-
-        // lookup the object with that name and push to the dailyAppointments array
           interviewers.push(state.interviewers[interviewer]);
       });
     }
   });
-    return interviewers; 
+  return interviewers; 
 };
 
 
-//  return an object that contains the interview data if it is passed an object that contains an interviewer.
+
+// ----------------------------------------- getInterview ------------------------------------- //
+
+//  returns an object that contains the interview data, if it is passed an object that contains an interviewer.
+
 function getInterview(state, interview) {
 
-  // if interview is not null
  if (interview) {
 
   return {
     student: interview.student,
     interviewer: {...state.interviewers[interview.interviewer]}
   }
+
  }
   return null;
 }
 
-//------------------------- countEmptySpots ------------------------------ //
+
+//---------------------------------------- countEmptySpots -------------------------------------- //
+
+// counts the number of interview spots available for a given day.
 
 const countEmptySpots = (appointments, day) => {
   let emptySpots = 0;
@@ -78,16 +77,17 @@ const countEmptySpots = (appointments, day) => {
   return emptySpots;
 };
 
-// --------------------------------- updateSpots ----------------------------- //
 
-// create days array without mutating original
+// ----------------------------------------- updateSpots -------------------------------------- //
+
+// updates the interview spots available after a new interview is booked.
+
 const updateSpots = function(state, appointments) {
 
   const days = [...state.days];
 
   const day = {...days.find(day => day.name === state.day)};
 
-  // calculate & update new spots for that day
   day.spots = countEmptySpots(appointments, day);
 
   days.splice(day.id - 1, 1, day);
@@ -96,9 +96,7 @@ const updateSpots = function(state, appointments) {
 };
 
 
+// --------------------------------- Exported functions -------------------------------------- //
 
-// ----------------- Exported functions -------------------- //
 export {getAppointmentsForDay, getInterview, getInterviewersForDay, countEmptySpots, updateSpots};
 
-// module.exports = {getAppointmentsForDay};
-//1. export default --> to import default export, need to import without curly braces

@@ -1,9 +1,11 @@
+// ----------------------------- Imported functions --------------------------------------- //
+
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
-// --------------------- Mock data --------------------------- //
 
+// --------------------------------- Mock data ---------------------------------------- //
 
-// mock data 
+// the state object simulates the different states for the app, which are subject to change from user interaction.
 
 const state = {
 
@@ -52,7 +54,8 @@ const state = {
   }
 };
 
-// --------------------- Tests for getAppointmentsForDay ------------------------ //
+
+// ----------------------------------- Tests for getAppointmentsForDay -------------------------------------- //
 
 test("getAppointmentsForDay returns an array", () => {
   const result = getAppointmentsForDay(state, "Monday");
@@ -80,8 +83,8 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-// ----------------------- Tests for getInterviewersForDay ------------------------ //
 
+// ------------------------------------- Tests for getInterviewersForDay -------------------------------------- //
 
 test("getInterviewersForDay returns an array", () => {
   const result = getInterviewersForDay(state, "Monday");
@@ -110,7 +113,7 @@ test("getInterviewersForDay returns an empty array when the day is not found", (
 });
 
 
-// ----------------------- Tests for getInterview ------------------------ //
+// ---------------------------------------- Tests for getInterview ----------------------------------- //
 
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
