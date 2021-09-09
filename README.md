@@ -1,4 +1,4 @@
-# Interview Scheduler
+# Interview Scheduler 🗓️
 
 Scheduler allows users to book an interview, select their interviewer, edit the interview details, and cancel the interview. 
 
