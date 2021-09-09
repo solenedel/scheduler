@@ -1,5 +1,7 @@
 import React from "react";
 
+// -------------------------------- Component function: Empty ---------------------------- //
+
 export default function Empty(props) {
 
   return (
@@ -8,9 +10,6 @@ export default function Empty(props) {
         className="appointment__add-button"
         src="images/add.png"
         alt="Add"
-        // we need to use onClick here instead of onAdd
-        // because we are in a normal HTML tag and not a react component. 
-        // We can only use reserved attributes like onClick
         onClick={props.onAdd}
       />
     </main>

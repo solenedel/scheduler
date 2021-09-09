@@ -1,6 +1,8 @@
+// -------------------------------- Imports ---------------------------- //
 import React from "react";
 import "./styles.scss";
 
+// -------------------------------- Component function: Header ---------------------------- //
 
 export default function Header(props) {
 
@@ -10,4 +12,5 @@ export default function Header(props) {
       <hr className="appointment__separator" />
     </header>
   );
+  
 }

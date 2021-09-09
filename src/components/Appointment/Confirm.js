@@ -1,5 +1,10 @@
+// ---------------------------------- Imports ------------------------------- //
+
 import React from "react";
 import Button from "../Button";
+
+
+// -------------------------------- Component function: Confirm ---------------------------- //
 
 export default function Confirm(props) {
 

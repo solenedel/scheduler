@@ -1,3 +1,5 @@
+// ------------------------- Import-------------------------- //
+
 import React from "react";
 import "./styles.scss";
 import Header from "components/Appointment/Header";
@@ -9,8 +11,12 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 import { useVisualMode } from "hooks/useVisualMode";
 
+
+// -------------------------------- Component function: Appointment ---------------------------- //
+
 export default function Appointment(props) {
 
+  // modes
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -27,8 +33,10 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  // ----------------------------- save function -------------------------- //
+
   const save = (name, interviewer) => {
-    // newly created interview
+    
     const interview = {
       student: name,
       interviewer: interviewer.id
@@ -39,7 +47,10 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
-  }
+  };
+
+
+  // ---------------------------------- cancel function ------------------------ //
 
   const cancel = apptId => {
 
@@ -49,46 +60,45 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
 
-  } 
+  }; 
    
+
+  // ------------------------- Appointment component -------------------------- //
 
   return (
 
     <article className="appointment">
       <Header time={props.time} />
-      {/* if mode is EMPTY, render EMPTY component. 
-      if mode is SHOW, render SHOW component. */}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && ( 
-      <Show student={props.interview.student} 
-             interviewer={props.interview.interviewer}
-             onDelete={() => transition(CONFIRM)}
-             onEdit={() => transition(EDIT)}
-      /> )} 
+      {mode === SHOW && ( <Show 
+                            student={props.interview.student} 
+                            interviewer={props.interview.interviewer}
+                            onDelete={() => transition(CONFIRM)}
+                            onEdit={() => transition(EDIT)} 
+                            /> )} 
       {mode === CREATE && <Form 
                             interviewers={props.interviewers} 
                             onCancel={() => back()} 
-                            onSave={save} /> }       
+                            onSave={save} />}       
       {mode === SAVING && <Status message="Saving"/>}
       {mode === CANCELLING && <Status message="Deleting"/>}  
       {mode === CONFIRM && <Confirm
-        message="are you sure you want to cancel this appointment?"
-        onConfirm={cancel}
-        onCancel={() => back()}
-        />}     
+                              message="are you sure you want to cancel this appointment?"
+                              onConfirm={cancel}
+                              onCancel={() => back()} />}     
       {mode === EDIT && <Form 
                           interviewers={props.interviewers} 
                           onCancel={() => back()} 
                           onSave={save}
                           name={props.interview.student}
-                          interviewer={props.interview.interviewer} /> }             
+                          interviewer={props.interview.interviewer} />}             
 
       {mode === ERROR_DELETE && <Error
-        onClose={() => back()}
-        message="Could not delete appointment."
-       />}
-      {mode === ERROR_SAVE && <Error onClose={() => back()}
-                                     message="Could not save the appointment" /> }
+                                  onClose={() => back()}
+                                  message="Could not delete appointment." />} 
+      {mode === ERROR_SAVE && <Error 
+                                onClose={() => back()}
+                                message="Could not save the appointment" />}
     </article>
 
   );

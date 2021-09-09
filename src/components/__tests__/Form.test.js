@@ -1,12 +1,14 @@
+// ---------------------------------- Imports ------------------------------- //
+
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { getByPlaceholderText, getByTestId, fireEvent } from "@testing-library/dom";
 import Form from "components/Appointment/Form";
 
 
+// ---------------------------------- Tests: Form component ------------------------------- //
 
 describe("Form", () => {
-
 
 afterEach(cleanup);
 
@@ -29,7 +31,6 @@ afterEach(cleanup);
     expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
 
- // BUG: Unable to find an element with the text: /student name cannot be blank
   it("validates that the student name is not blank", () => {
     const onSave = jest.fn();
     const { getByText } = render(
@@ -38,7 +39,6 @@ afterEach(cleanup);
     fireEvent.click(getByText("Save"));
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
    
-    // do not call onSave
     expect(onSave).not.toHaveBeenCalled();
   });
  
