@@ -1,8 +1,10 @@
+// -------------------------------- Imports ---------------------------- //
 import React from "react";
 import "./InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 import PropTypes from 'prop-types';
 
+// -------------------------------- Component function: InterviewerList ---------------------------- //
 
 export default function InterviewerList(props) {
   
@@ -11,20 +13,23 @@ export default function InterviewerList(props) {
     interviewers: PropTypes.array.isRequired
   };
 
-  // makes sure that interviewers is truthy, and that we have access to them
+  // interviewerList contains many InterviewerListItems, which are returned in this map function.
   const interviewerListItems = props.interviewers && props.interviewers.map(interviewer => {
+
     return (
       <InterviewerListItem 
         key={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
         selected={interviewer.id === props.interviewerId}
-        //setInterviewer prop is an anon function that returns the return value of props.setInterviewer(interviewer.id) (which is the real function that changes the state)
         setInterviewer={() => props.setInterviewer(interviewer)}
       />
-    )
+    );
+
   });
 
+
+  // ---------------------- InterviewerList component ------------------------ //
 
   return (
     <section className="interviewers">

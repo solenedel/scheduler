@@ -1,4 +1,4 @@
-// -------------------- Dependencies / Setup ------------------- //
+// -------------------------------------- Imports  ----------------------------------- //
 
 import React from "react";
 import DayList from "./DayList";
@@ -8,7 +8,7 @@ import useApplicationData from "hooks/useApplicationData";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
-// -------------------------- COMPONENT: Application --------------------------- //
+// -------------------------------- Component function: Application ---------------------------- //
 
 export default function Application(props) {
 
@@ -19,28 +19,23 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  
-  
-  // call function to get the appointments for a certain day depending on the
-  // state of the selected day
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   
-  //const setDays = days => setState(prev => ({ ...prev, days }));
 
-  // JSX to be returned by the component function
+    // -------------------------------- Application component -------------------------------- //
+
   return (
     <main className="layout">
 
       <section className="sidebar">
       <img
-          className="sidebar--centered"
-          src="images/logo.png"
-          alt="Interview Scheduler"
+        className="sidebar--centered"
+        src="images/logo.png"
+        alt="Interview Scheduler"
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-        // CREATE PROPS and pass them to DayList
           day={state.day}
           days={state.days}
           setDay={setDay}
@@ -77,5 +72,4 @@ export default function Application(props) {
     </main>
   );
 
-  // end of Application component function 
 }
