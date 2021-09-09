@@ -25,13 +25,13 @@ export default function Form(props) {
   const reset = () => {
     setName("");
     setInterviewer(null);
-    // setError("");
+    setError("");
   };
 
   // cancel will call reset and cancel
   const cancel = () => {
     reset();
-    // setError("");
+    setError("");
     props.onCancel();
   };
 
@@ -42,7 +42,7 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
-    // setError("");
+    setError("");
     props.onSave(name, interviewer);
   }
 
