@@ -1,6 +1,8 @@
-describe("appointments", () => {
+// --------------------------------------- CYPRESS TESTS FOR APPOINTMENTS ----------------------------- //
+
+describe("Appointments", () => {
   
-  // reset database, visit root 
+  // reset database
   beforeEach(() => {
     cy.request("GET", "/api/debug/reset");
     cy.visit("/");
@@ -9,6 +11,9 @@ describe("appointments", () => {
  
 
    // test steps
+
+   // --------------------------- Test: booking an interview ------------------------------ //
+
   it('should book an interview', () => {
     cy.get('[alt=Add]')
     .first()
@@ -23,6 +28,9 @@ describe("appointments", () => {
     .contains('.appointment__card--show', 'Sylvia Palmer');
   });
 
+
+  // ------------------------ Test: editing an interview ------------------------------ //
+
   it("should edit an interview", () => {
     cy.get("[alt=Edit]")
       .first()
@@ -35,6 +43,22 @@ describe("appointments", () => {
   
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Tori Malcolm");
+  });
+
+
+  // ------------------------ Test: cancelling an interview ------------------------------ //
+
+  it("should cancel an interview", () => {
+    cy.get("[alt=Delete]")
+    .click({ force: true });
+
+    cy.contains("Confirm").click();
+
+    cy.contains("Deleting").should("exist");
+    cy.contains("Deleting").should("not.exist");
+
+    cy.contains(".appointment__card--show", "Archie Cohen")
+      .should("not.exist");
   });
 
 
