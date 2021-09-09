@@ -4,13 +4,13 @@ Scheduler allows users to book an interview, select their interviewer, edit the 
 
 This is a front-end React app that uses several testing tools: Storybook, Jest and Cypress. The UI is reponsively designed, with both mobile/tablet and desktop styles.
 
-## Screenshots
+## Screenshots 📸
 
-## Setup
+## Setup 💡
 
 Install dependencies with `npm install`.
 
-## Running Webpack Development Server
+## Running Webpack Development Server 
 
 ```sh
 npm start
