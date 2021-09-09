@@ -1,11 +1,18 @@
+// ------------------------------------------ imports ----------------------------------- //
+
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { updateSpots } from "helpers/selectors";
 
 
+// ------------------------------------- Hook: useApplicationData -------------------------------- //
+
+// contains several helper functions to update states upon user interaction
+
 function useApplicationData() {
 
   // object to store states
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -14,29 +21,29 @@ function useApplicationData() {
   });
 
 
-  // -------------- setDay ----------------------- //
+  // ---------------------------------------- setDay -------------------------------------- //
 
   const setDay = day => setState({ ...state, day });
 
-  // -------------- bookInterview ----------------------- //
+
+  // ---------------------------------- bookInterview -------------------------------------- //
 
   const bookInterview = (apptId, interview) => {
 
-    // create an appointment object from spreading the original appointment object in state.appointments with id apptId, then overwrite the interview property with the newly created interview object
     const appointment = {
       ...state.appointments[apptId],
-      interview: {...interview} //update the interview key with the new interview
+      interview: {...interview} 
     };
 
-    // create an appointments object with the already existing appointments, and
-    // add the newest appointment object to it
     const appointments = {
       ...state.appointments,
       [apptId]: appointment
     };
 
-    const days = updateSpots(state, appointments)
-    // request to database- add interview object to interviews table
+    const days = updateSpots(state, appointments);
+
+    
+    // request to database: add interview to interviews table
     return axios.put(
       `/api/appointments/${apptId}`, {interview}
     ).then(() => setState(prev => {
@@ -49,14 +56,14 @@ function useApplicationData() {
 
   };
 
-// ---------------- cancelInterview ----------------------- //
 
+// ------------------------------- cancelInterview ---------------------------------- //
 
 const cancelInterview = (apptId) => {
 
   const appointment = {
     ...state.appointments[apptId],
-    interview: null //change interview to null
+    interview: null 
   };
 
   const appointments = {
@@ -64,32 +71,34 @@ const cancelInterview = (apptId) => {
     [apptId]: appointment
   };
 
-  const days = updateSpots(state, appointments)
+  const days = updateSpots(state, appointments);
 
+  // request to database: delete interview from interviews table
   return axios.delete(`/api/appointments/${apptId}`)
           .then(res => {
-            console.log('delete: res', res)
             setState(prev => {
               return {
                 ...prev,
                 appointments,
                 days
               }
-            })
-          })
+            });
+          });
 };
 
 
-// ---------------------------- useEffect ----------------------------- //
+// --------------------------------- useEffect ---------------------------------- //
 
-  // request days and appointments data. The promise resolves when both get requests are complete.
+  // request days, appointments and interviews data. The promise resolves when all get requests are complete.
+
   useEffect(() => {
-    // Promise.all returns an array of the responses from each request
+
     Promise.all([
       axios.get('/api/days'),
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then(response => {
+
         setState(prev => {
 
           return {
@@ -100,11 +109,15 @@ const cancelInterview = (apptId) => {
           };
 
         });
+
     }).catch(response => console.log('Error: ', response.message));
+
   }, []);
 
-
   return {state, setDay, bookInterview, cancelInterview};
+
 }
 
+
+// export the hook function
 export default useApplicationData;

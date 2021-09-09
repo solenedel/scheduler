@@ -1,14 +1,19 @@
+
+// ------------------------------------------ Imports ----------------------------------- //
+
 import { renderHook, act } from "@testing-library/react-hooks";
-// const useVisualMode = require('hooks/useVisualMode');
 import { useVisualMode } from "../useVisualMode";
 
-// const ReactTestRenderer = require('react-test-renderer');
+
+// ----------------------------------- Tests for useVisualMode ---------------------------- //
 
 
-// modes
+// test modes
 const FIRST = "FIRST";
 const SECOND = "SECOND";
 const THIRD = "THIRD";
+
+
 
 test("useVisualMode should initialize with default value", () => {
   const { result } = renderHook(() => useVisualMode(FIRST));
